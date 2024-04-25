@@ -1,0 +1,27 @@
+old_sound_rabbit_mq:
+    producers:
+        rolling_dice_trigger:
+            connection: default
+            exchange_options: { name: 'rolling_dice_trigger', type: direct }
+
+        rolling_dice_trigger_retry:
+            connection: default
+            exchange_options: { name: 'rolling_dice_trigger_retry', type: direct }
+            queue_options:
+                name: 'rolling_dice_trigger_retry'
+                arguments:
+                    x-dead-letter-exchange: [ 'S', 'rolling_dice_trigger' ]
+
+    batch_consumers:
+        rolling_dice_trigger_consumer:
+            connection: default
+            exchange_options: {name: 'rolling_dice_trigger', type: direct}
+            queue_options: { name: 'rolling_dice_trigger_queue' }
+            callback: App\MessageQueue\RollingDice\RollingDiceProcessorConsumer
+            idle_timeout: 120
+            idle_timeout_exit_code: 0
+            qos_options:
+                prefetch_count: 1
+            timeout_wait: 0
+            graceful_max_execution:
+                timeout: 60

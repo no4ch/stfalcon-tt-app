@@ -2,7 +2,7 @@ old_sound_rabbit_mq:
     connections:
         default:
 #            url: '%env(RABBITMQ_URL)%'
-            host: 'rabbitmq'
+            host: 'rabbitmq' # todo can be moved to env
             port: 5672
             user: 'tt-user'
             password: 'tt-pass'

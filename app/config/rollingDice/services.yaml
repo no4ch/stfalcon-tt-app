@@ -1,0 +1,8 @@
+services:
+    App\Model\RollingDice\RollingDiceTriggerProcessor:
+        arguments:
+            $rollingDiceTriggerProducer: '@old_sound_rabbit_mq.rolling_dice_trigger_producer'
+
+    App\MessageQueue\RollingDice\RollingDiceProcessorConsumer:
+        arguments:
+            $rollingDiceTriggerRetryProducer: '@old_sound_rabbit_mq.rolling_dice_trigger_retry_producer'
