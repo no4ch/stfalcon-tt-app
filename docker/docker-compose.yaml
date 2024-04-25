@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+    app:
+        container_name: stfalcon-tt-app
+        image: no4ch/stfalcon-tt-app
+        build:
+            context: ./services/app
+            dockerfile: Dockerfile
+        volumes:
+            - ./../app:/var/www/html
+        tty: true
