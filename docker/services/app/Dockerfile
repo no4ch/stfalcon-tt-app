@@ -26,7 +26,9 @@ RUN apk add php81-xml \
     php81-opcache \
     php81-phar \
     php81-openssl \
-    php81-curl
+    php81-curl \
+    php81-pcntl \
+    php81-sockets
 
 # fix for getting php globaly
 RUN ln -s /usr/bin/php81 /usr/bin/php

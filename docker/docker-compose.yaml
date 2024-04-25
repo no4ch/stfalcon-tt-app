@@ -10,3 +10,17 @@ services:
         volumes:
             - ./../app:/var/www/html
         tty: true
+
+    rabbitmq:
+        container_name: stfalcon-tt-rabbitmq
+        image: rabbitmq:3.13.1-management-alpine
+        hostname: tt-rabbitmq #fix for saving state
+        restart: always
+        environment:
+            RABBITMQ_DEFAULT_USER: 'tt-user'
+            RABBITMQ_DEFAULT_PASS: 'tt-pass'
+            RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS: '-rabbit disk_free_limit 2147483648' #2GB
+        ports:
+            - '8083:15672'
+        volumes:
+            - ./services/rabbitmq/data:/var/lib/rabbitmq
